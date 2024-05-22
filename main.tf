@@ -57,23 +57,13 @@ resource "aws_iam_policy" "lambda_policy" {
         Resource = "arn:aws:logs:*:*:*"
       },
       {
-        Action = [
-          "s3:GetObject",
-          "s3:PutObject",
-          "s3:DeleteObject"
-        ],
+        Action = "s3:*",
         Effect = "Allow",
-        Resource = [
-          "arn:aws:s3:::${var.source_bucket}/*",
-          "arn:aws:s3:::${var.small_bucket}/*",
-          "arn:aws:s3:::${var.medium_bucket}/*",
-          "arn:aws:s3:::${var.large_bucket}/*"
-        ]
+        Resource = "*"
       }
     ]
   })
 }
-
 ### POLICY ATTACH
 
 resource "aws_iam_role_policy_attachment" "lambda_attach" {
